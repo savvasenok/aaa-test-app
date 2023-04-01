@@ -1,8 +1,8 @@
 {
-  "api_base_url": "https://texterify.allaboutapps.at/api",
+  "api_base_url": "https://app.texterify.com/api",
   "api_version": "v1",
   "project_id": "250987e0-e31d-4eb8-8832-7145acbe8732",
   "export_configuration_id": "87b4c3eb-3498-4530-9349-97fc1db211c1",
-  "export_directory": "src/main/res",
+  "export_directory": "src/main/res/",
   "project_path": ""
 }
