@@ -4,5 +4,6 @@ plugins {
 }
 
 dependencies {
+    implementation(Dependencies.KotlinStdLib)
     implementation(Dependencies.Retrofit)
 }

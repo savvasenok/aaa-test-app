@@ -26,14 +26,15 @@ class FirebaseTokenHandler @Inject constructor(
 
     fun sendFirebaseTokenToServer(token: String) {
         Timber.d("Token: $token")
-        registerTokenWithServer(token, { onError() }, { onSuccess() }, { })
+        // registerTokenWithServer(token, { onError() }, { onSuccess() }, { })
     }
 
     @SuppressLint("CheckResult")
     fun registerTokenWithServer(token: String, onError: () -> Unit, onSuccess: () -> Unit, onComplete: () -> Unit) {
         firebaseTokenService.registerFirebaseToken(token)
-            .doFinally(onComplete)
-            .subscribe({ onSuccess.invoke() }, { onError.invoke() })
+
+            //.doFinally(onComplete)
+            // .subscribe({ onSuccess.invoke() }, { onError.invoke() })
     }
 
     private fun onError() {

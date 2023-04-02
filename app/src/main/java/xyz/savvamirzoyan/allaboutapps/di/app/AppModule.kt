@@ -8,6 +8,7 @@ import at.allaboutapps.retrofit.converter.unwrap.UnwrapConverterFactory
 import com.google.firebase.messaging.FirebaseMessaging
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -15,10 +16,10 @@ import dagger.Reusable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import xyz.savvamirzoyan.allaboutapps.BuildConfig
 import xyz.savvamirzoyan.allaboutapps.di.viewmodel.ViewModelModule
+import xyz.savvamirzoyan.allaboutapps.networking.ResultCallAdapterFactory
 import xyz.savvamirzoyan.allaboutapps.networking.UserAgentInterceptor
 import xyz.savvamirzoyan.allaboutapps.networking.services.ApiService
 import java.util.Date
@@ -70,7 +71,8 @@ class AppModule {
             .client(okHttp)
             .addConverterFactory(UnwrapConverterFactory())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addCallAdapterFactory(ResultCallAdapterFactory.create())
+            // .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build()
             .create(ApiService::class.java)
     }

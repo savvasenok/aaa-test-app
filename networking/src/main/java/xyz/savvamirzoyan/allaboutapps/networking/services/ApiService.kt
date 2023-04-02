@@ -1,13 +1,11 @@
 package xyz.savvamirzoyan.allaboutapps.networking.services
 
-import io.reactivex.rxjava3.core.Single
-import retrofit2.http.POST
-import xyz.savvamirzoyan.allaboutapps.networking.model.AuthToken
-
-const val API_VERSION = "v1"
+import retrofit2.http.GET
+import xyz.savvamirzoyan.allaaboutapps.core.Result
+import xyz.savvamirzoyan.allaboutapps.networking.model.GenericClubInfoCloud
 
 interface ApiService {
 
-    @POST("/$API_VERSION/login")
-    fun login(): Single<AuthToken>
+    @GET("clubs.json")
+    suspend fun fetchData(): Result<List<GenericClubInfoCloud>>
 }

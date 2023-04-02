@@ -15,13 +15,14 @@ sourceSets.main.get().java.srcDirs += (sourceSets.main.get() as org.gradle.api.i
 
 dependencies {
     implementation(project(":unwrapretrofit"))
+    implementation(project(":core"))
     implementation(Dependencies.Retrofit)
     implementation(Dependencies.OkHttp)
 
     implementation(Dependencies.Moshi)
     kapt(Dependencies.Kapt.MoshiCodegen)
 
-    implementation(Dependencies.RxJava3)
+    // implementation(Dependencies.RxJava3)
 
     implementation(Dependencies.KotlinStdLib)
 }

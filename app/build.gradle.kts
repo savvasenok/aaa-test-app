@@ -51,18 +51,18 @@ android {
             dimension = "environment"
             ext["neverBuildRelease"] = true
 
-            buildConfigField("String", "SERVER_API_URL", "\"https://debug.example.com/\"")
+            buildConfigField("String", "SERVER_API_URL", "\"https://public.allaboutapps.at/hiring/\"")
         }
         create("staging") {
             dimension = "environment"
             ext["neverBuildRelease"] = true
 
-            buildConfigField("String", "SERVER_API_URL", "\"https://staging.example.com/\"")
+            buildConfigField("String", "SERVER_API_URL", "\"https://public.allaboutapps.at/hiring/\"")
         }
         create("live") {
             dimension = "environment"
 
-            buildConfigField("String", "SERVER_API_URL", "\"https://www.example.com/\"")
+            buildConfigField("String", "SERVER_API_URL", "\"https://public.allaboutapps.at/hiring/\"")
         }
     }
 
@@ -85,6 +85,7 @@ android {
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
+    implementation(project(":core"))
     implementation(project(":networking"))
     implementation(project(":unwrapretrofit"))
     implementation(project(":glide"))
@@ -128,11 +129,11 @@ dependencies {
     // logging
     implementation(Dependencies.Timber)
 
-    implementation(Dependencies.RxJava3)
-    implementation(Dependencies.RxKotlin3)
+    // implementation(Dependencies.RxJava3)
+    // implementation(Dependencies.RxKotlin3)
 
     // networking
-    implementation(Dependencies.RetrofitAdapterRxJava3)
+    // implementation(Dependencies.RetrofitAdapterRxJava3)
     implementation(Dependencies.RetrofitConverterMoshi)
 
     implementation(Dependencies.OkHttpLoggingInterceptor)
