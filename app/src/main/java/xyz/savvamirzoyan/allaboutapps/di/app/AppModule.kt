@@ -8,7 +8,6 @@ import at.allaboutapps.retrofit.converter.unwrap.UnwrapConverterFactory
 import com.google.firebase.messaging.FirebaseMessaging
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -22,6 +21,7 @@ import xyz.savvamirzoyan.allaboutapps.di.viewmodel.ViewModelModule
 import xyz.savvamirzoyan.allaboutapps.networking.ResultCallAdapterFactory
 import xyz.savvamirzoyan.allaboutapps.networking.UserAgentInterceptor
 import xyz.savvamirzoyan.allaboutapps.networking.services.ApiService
+import xyz.savvamirzoyan.allaboutapps.storage.StorageModule
 import java.util.Date
 import javax.inject.Singleton
 
@@ -29,6 +29,7 @@ import javax.inject.Singleton
     includes = [
         ViewModelModule::class,
         AppModule.Bindings::class,
+        StorageModule::class,
     ],
 )
 class AppModule {

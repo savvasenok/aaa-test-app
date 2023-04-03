@@ -3,3 +3,7 @@ plugins {
     kotlin
     `kotlin-kapt`
 }
+
+dependencies {
+    implementation(Dependencies.Coroutines)
+}

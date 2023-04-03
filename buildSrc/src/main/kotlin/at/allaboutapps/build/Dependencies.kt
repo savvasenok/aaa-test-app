@@ -9,7 +9,9 @@ object Versions {
     const val Moshi = "1.13.0"
     const val OkHttp = "4.10.0"
     const val Retrofit = "2.9.0"
-    const val Room = "2.5.0-alpha02"
+    const val Room = "2.4.3"
+    const val Coroutines = "1.6.3"
+
     // const val RxJava3 = "3.1.5"
     const val LifecycleVersion = "2.6.0-alpha01"
     const val NavVersion = "2.5.1"
@@ -101,11 +103,14 @@ object Dependencies {
     // Retrofit
     const val Retrofit = "com.squareup.retrofit2:retrofit:${Versions.Retrofit}"
     const val RetrofitConverterMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.Retrofit}"
+
     // const val RetrofitAdapterRxJava3 = "com.squareup.retrofit2:adapter-rxjava3:${Versions.Retrofit}"
     const val RetrofitMock = "com.squareup.retrofit2:retrofit-mock:${Versions.Retrofit}"
 
     // Room
     const val RoomRuntime = "androidx.room:room-runtime:${Versions.Room}"
+    const val RoomKotlin = "androidx.room:room-ktx:${Versions.Room}"
+    const val RoomAndroid = "androidx.room:room-common:${Versions.Room}"
     // const val RoomRxJava3 = "androidx.room:room-rxjava3:${Versions.Room}"
 
     // // Reactive
@@ -114,6 +119,9 @@ object Dependencies {
     // const val RxKotlin3 = "io.reactivex.rxjava3:rxkotlin:3.0.1"
     // const val RxBinding = "com.jakewharton.rxbinding4:rxbinding:4.0.0"
     // const val RxRelay = "com.jakewharton.rxrelay3:rxrelay:3.0.1"
+
+    // Coroutines
+    const val Coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.Coroutines}"
 
     // Misc
     const val Timber = "com.jakewharton.timber:timber:5.0.1"
