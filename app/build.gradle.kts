@@ -83,11 +83,14 @@ android {
 }
 
 dependencies {
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
     implementation(project(":core"))
     implementation(project(":storage"))
     implementation(project(":networking"))
+    implementation(project(":domain"))
+    implementation(project(":data"))
     implementation(project(":unwrapretrofit"))
     implementation(project(":glide"))
 

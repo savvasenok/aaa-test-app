@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.Subcomponent
 import dagger.multibindings.IntoMap
 import dagger.multibindings.Multibinds
-import xyz.savvamirzoyan.allaboutapps.features.start.MainViewModel
+import xyz.savvamirzoyan.allaboutapps.features.clubslist.ClubsListViewModel
 import javax.inject.Provider
 
 @Module(subcomponents = [ViewModelComponent::class])
@@ -16,8 +16,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
+    @ViewModelKey(ClubsListViewModel::class)
+    abstract fun bindMainViewModel(viewModel: ClubsListViewModel): ViewModel
 
     @Multibinds
     abstract fun viewModels(): Map<Class<out ViewModel>, @JvmSuppressWildcards ViewModel>

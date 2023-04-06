@@ -11,7 +11,7 @@ sealed class Result<T : Any> {
     val isException: Boolean get() = this is Exception
 
     fun getOrNull(): T? = (this as? Success)?.data
-    fun exceptionOrNull(): Throwable? = (this as? Result.Exception)?.throwable
+    fun exceptionOrNull(): Throwable? = (this as? Exception)?.throwable
 
     inline fun <R : Any> fold(
         onSuccess: (value: T) -> R,
@@ -23,9 +23,18 @@ sealed class Result<T : Any> {
         is Success -> onSuccess(data)
     }
 
-    inline fun <R : Any> map(transform: (data: T) -> R): Result<R> = when (this) {
+    inline fun <R : Any> map(transform: (data: T) -> R?): Result<R> = when (this) {
         is Error -> Error(code, message)
         is Exception -> Exception(throwable)
-        is Success -> Success(transform(data))
+        is Success -> {
+            val transformed = transform(data)
+            if (transformed != null) Success(transformed)
+            else Error(404, "")
+        }
+    }
+
+    inline fun onSuccess(onSuccess: (data: T) -> Unit): Result<T> {
+        if (this is Success) onSuccess(data)
+        return this
     }
 }

@@ -5,7 +5,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
 import xyz.savvamirzoyan.allaboutapps.storage.model.GenericClubInfoLocal
 
 @Dao
@@ -17,11 +16,8 @@ interface GenericClubInfoDao {
     @Query("SELECT * FROM generic_club_info")
     suspend fun selectAll(): List<GenericClubInfoLocal>
 
-    @Query("SELECT * FROM generic_club_info WHERE id = :id")
-    suspend fun select(id: Long): GenericClubInfoLocal?
-
-    @Query("SELECT * FROM generic_club_info")
-    fun selectAllFlow(): Flow<List<GenericClubInfoLocal>>
+    @Query("SELECT * FROM generic_club_info WHERE name = :name")
+    suspend fun select(name: String): GenericClubInfoLocal?
 
     @Delete
     suspend fun delete(item: GenericClubInfoLocal)

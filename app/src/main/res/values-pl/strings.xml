@@ -1,5 +1,14 @@
 <?xml version="1.0"?>
 <resources>
   <string name="app_name"></string>
-  <string name="texterify_timestamp">2023-04-01T18:11:11Z</string>
+  <plurals name="clubs_list_value_label">
+      <item quantity="other"></item>
+      <item quantity="zero"></item>
+      <item quantity="one"></item>
+      <item quantity="two"></item>
+      <item quantity="few"></item>
+      <item quantity="many"></item>
+  </plurals>
+  <string name="hint_sorting_order"></string>
+  <string name="texterify_timestamp">2023-04-05T22:24:06Z</string>
 </resources>

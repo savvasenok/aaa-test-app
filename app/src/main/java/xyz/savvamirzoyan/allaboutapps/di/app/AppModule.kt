@@ -17,7 +17,10 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import xyz.savvamirzoyan.allaboutapps.BuildConfig
+import xyz.savvamirzoyan.allaboutapps.data.DataModule
+import xyz.savvamirzoyan.allaboutapps.di.UseCaseModule
 import xyz.savvamirzoyan.allaboutapps.di.viewmodel.ViewModelModule
+import xyz.savvamirzoyan.allaboutapps.features.clubslist.GenericClubInfoDomainToListUiMapper
 import xyz.savvamirzoyan.allaboutapps.networking.ResultCallAdapterFactory
 import xyz.savvamirzoyan.allaboutapps.networking.UserAgentInterceptor
 import xyz.savvamirzoyan.allaboutapps.networking.services.ApiService
@@ -30,6 +33,8 @@ import javax.inject.Singleton
         ViewModelModule::class,
         AppModule.Bindings::class,
         StorageModule::class,
+        UseCaseModule::class,
+        DataModule::class,
     ],
 )
 class AppModule {
@@ -38,6 +43,10 @@ class AppModule {
     interface Bindings {
         @Binds
         fun context(app: Application): Context
+
+        @Singleton
+        @Binds
+        fun bindGenericClubInfoDomainToListUiMapper(base: GenericClubInfoDomainToListUiMapper.Base): GenericClubInfoDomainToListUiMapper
     }
 
     @Singleton
