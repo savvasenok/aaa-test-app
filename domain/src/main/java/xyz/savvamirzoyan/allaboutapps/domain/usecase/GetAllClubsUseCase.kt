@@ -8,13 +8,14 @@ import xyz.savvamirzoyan.allaboutapps.domain.contract.IClubsRepository
 import xyz.savvamirzoyan.allaboutapps.domain.model.GenericClubInfoDomain
 import javax.inject.Inject
 
-interface GetAllClubsUseCase : BaseUseCase.Flowable<NoParams, GetAllClubsUseCase.GenericClubInfoListDomain> {
+interface GetAllClubsUseCase : BaseUseCase.Flowable<NoParams, GenericClubInfoListDomain> {
 
     class Base @Inject constructor(private val repository: IClubsRepository) : GetAllClubsUseCase {
-        override fun run(request: NoParams): Flow<Result<GenericClubInfoListDomain>> = repository
-            .getClubsFlow()
+        override fun run(request: NoParams): Flow<Result<GenericClubInfoListDomain>> = repository.clubsFlow
             .mapResult { GenericClubInfoListDomain(it) }
-    }
 
-    data class GenericClubInfoListDomain(val clubs: List<GenericClubInfoDomain>) : Model.Domain
+        override suspend fun rerun(request: NoParams) = repository.refresh()
+    }
 }
+
+data class GenericClubInfoListDomain(val clubs: List<GenericClubInfoDomain>) : Model.Domain

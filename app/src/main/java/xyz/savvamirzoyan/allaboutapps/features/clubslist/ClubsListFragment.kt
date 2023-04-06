@@ -1,7 +1,6 @@
 package xyz.savvamirzoyan.allaboutapps.features.clubslist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,11 +58,15 @@ class ClubsListFragment : BaseFragment(R.layout.fragment_clubs_list) {
         binding.rvClubs.adapter = clubsAdapter
         binding.rvClubs.layoutManager = LinearLayoutManager(requireContext())
         binding.rvClubs.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+
+        binding.swipeRefresh.setOnRefreshListener { viewModel.refresh() }
     }
 
     private fun setupFlowListeners() {
         collect(viewModel.clubsFlow) {
+            binding.swipeRefresh.isRefreshing = false
             binding.rvClubs.scrollToPosition(0)
+
             clubsAdapter.update(it)
         }
     }

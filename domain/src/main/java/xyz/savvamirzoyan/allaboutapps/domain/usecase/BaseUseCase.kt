@@ -16,6 +16,7 @@ sealed interface BaseUseCase {
 
     interface Flowable<in Request : Model.Domain, Data : Model.Domain> : BaseUseCase {
         fun run(request: Request): Flow<Result<Data>>
+        suspend fun rerun(request: Request) // created only for asking this flow to re-emit, which is single-method in other 2 UseCases
     }
 }
 
