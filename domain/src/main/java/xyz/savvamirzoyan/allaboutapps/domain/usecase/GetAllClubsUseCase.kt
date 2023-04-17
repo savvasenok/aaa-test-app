@@ -12,7 +12,7 @@ interface GetAllClubsUseCase : BaseUseCase.Flowable<NoParams, GenericClubInfoLis
 
     class Base @Inject constructor(private val repository: IClubsRepository) : GetAllClubsUseCase {
         override fun run(request: NoParams): Flow<Result<GenericClubInfoListDomain>> = repository.clubsFlow
-            .mapResult { GenericClubInfoListDomain(it) }
+            .mapResult { list -> GenericClubInfoListDomain(list) }
 
         override suspend fun rerun(request: NoParams) = repository.refresh()
     }

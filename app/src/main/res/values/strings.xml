@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <resources>
+  <string name="alert_data_from_cache">Diese Daten stammen aus dem lokalen Cache</string>
   <string name="app_name">Rangliste</string>
+  <string name="button_try_again">Wiederholen</string>
   <plurals name="clubs_list_value_label">
       <item quantity="other">%d Millionen</item>
       <item quantity="zero"></item>
@@ -9,6 +11,11 @@
       <item quantity="few"></item>
       <item quantity="many"></item>
   </plurals>
+  <string name="error_message_no_data">Der Server hat keine Daten zurückgegeben</string>
+  <string name="error_message_no_internet">Es tut uns leid, es besteht momentan keine Internetverbindung. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut</string>
+  <string name="error_title_no_data">Keine Daten</string>
+  <string name="error_title_no_internet">Keine Internetverbindung</string>
+  <string name="error_title_unexpected">Unerwarteter Fehler</string>
   <string name="hint_sorting_order">Nach Name/Wert sortieren</string>
-  <string name="texterify_timestamp">2023-04-05T22:24:06Z</string>
+  <string name="texterify_timestamp">2023-04-15T23:47:06Z</string>
 </resources>

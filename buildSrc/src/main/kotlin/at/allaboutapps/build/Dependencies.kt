@@ -11,6 +11,8 @@ object Versions {
     const val Retrofit = "2.9.0"
     const val Room = "2.4.3"
     const val Coroutines = "1.6.3"
+    const val JUnit = "4.13.2"
+    const val JunitExt = "1.1.4"
 
     // const val RxJava3 = "3.1.5"
     const val LifecycleVersion = "2.6.0-alpha01"
@@ -126,4 +128,9 @@ object Dependencies {
     // Misc
     const val Timber = "com.jakewharton.timber:timber:5.0.1"
     const val ViewBindingDelegate = "com.github.Zhuinden:fragmentviewbindingdelegate-kt:1.0.0"
+
+    // Testing
+    const val JUnit = "junit:junit:${Versions.JUnit}"
+    const val TestExtJunit = "androidx.test.ext:junit:${Versions.JunitExt}"
+    // const val  = "androidx.test.espresso:espresso-core:$espressoVersion"
 }

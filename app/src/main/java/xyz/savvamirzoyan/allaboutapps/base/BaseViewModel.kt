@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import xyz.savvamirzoyan.allaaboutapps.core.Result
+import xyz.savvamirzoyan.allaboutapps.model.TextValue
 
 abstract class BaseViewModel : ViewModel() {
 
@@ -21,6 +22,9 @@ abstract class BaseViewModel : ViewModel() {
 
     private val _navigationIntentFlow = MutableSharedFlow<Intent>(replay = 0)
     val navigationIntentFlow: Flow<Intent> = _navigationIntentFlow
+
+    private val _alertFlow = MutableSharedFlow<TextValue>(replay = 0)
+    val alertFlow: Flow<TextValue> = _alertFlow
 
     suspend fun <T> whileLoading(function: suspend () -> T): T {
         _loadingFlow.emit(true)
@@ -37,6 +41,8 @@ abstract class BaseViewModel : ViewModel() {
     protected suspend fun closeFragment() {
         _closeFragmentFlow.emit(Unit)
     }
+
+    protected suspend fun showAlert(text: TextValue) = _alertFlow.emit(text)
 
     protected suspend fun navigateTo(intent: Intent) = _navigationIntentFlow.emit(intent)
 

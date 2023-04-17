@@ -6,6 +6,7 @@ plugins {
 }
 
 dependencies {
+    testImplementation(kotlin("test"))
 
     implementation(project(":core"))
     implementation(project(":networking"))
@@ -14,6 +15,10 @@ dependencies {
 
     implementation(Dependencies.Dagger)
     implementation(Dependencies.Coroutines)
-    // implementation(Dependencies.DaggerAndroid)
-    // implementation(Dependencies.DaggerAndroidSupport)
+
+    testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }

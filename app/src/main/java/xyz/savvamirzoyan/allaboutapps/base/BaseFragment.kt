@@ -1,11 +1,13 @@
 package xyz.savvamirzoyan.allaboutapps.base
 
+import android.widget.Toast.LENGTH_SHORT
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -74,6 +76,12 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int = 0) :
             flow.collect {
                 function(it)
             }
+        }
+    }
+
+    protected fun listenToAlerts(viewModel: BaseViewModel) {
+        collect(viewModel.alertFlow) {
+            Snackbar.make(requireContext(), requireView(), it.getString(requireContext()), LENGTH_SHORT).show()
         }
     }
 

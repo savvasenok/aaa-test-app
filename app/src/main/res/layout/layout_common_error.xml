@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_error"
+        app:tint="@color/colorError" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_errorTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textSize="24sp"
+        tools:text="@string/error_title_no_data" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_errorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        tools:text="@string/error_message_no_data" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_tryAgain"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/button_try_again"
+        app:icon="@drawable/animated_spinning_refresh"
+        app:iconPadding="8dp" />
+</LinearLayout>
