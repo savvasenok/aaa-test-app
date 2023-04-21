@@ -18,6 +18,7 @@
             app:menu="@menu/menu_club_sorting"
             app:title="@string/app_name"
             app:titleTextColor="?colorOnPrimary" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -32,6 +33,7 @@
             android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:overScrollMode="never"
+            android:transitionGroup="true"
             android:paddingBottom="@dimen/recycler_view_bottom_padding"
             tools:listitem="@layout/layout_club_list_item" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

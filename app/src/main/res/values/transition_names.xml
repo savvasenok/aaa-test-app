@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="transition_name_club_image">club_image</string>
+    <string name="transition_name_club_country">club_country</string>
+    <string name="transition_name_club_layout">club_layout</string>
+</resources>

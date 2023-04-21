@@ -5,8 +5,9 @@ import xyz.savvamirzoyan.allaaboutapps.core.Result
 import xyz.savvamirzoyan.allaboutapps.domain.model.GenericClubInfoDomain
 
 interface IClubsRepository {
+
     val clubsFlow: Flow<Result<List<GenericClubInfoDomain>>>
 
     suspend fun refresh()
-    suspend fun getClub(clubName: String): Result<GenericClubInfoDomain>
+    suspend fun getClub(clubId: String): Result<GenericClubInfoDomain>
 }

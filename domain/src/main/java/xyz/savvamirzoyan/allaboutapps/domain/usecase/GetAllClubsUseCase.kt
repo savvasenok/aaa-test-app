@@ -11,7 +11,7 @@ import javax.inject.Inject
 interface GetAllClubsUseCase : BaseUseCase.Flowable<NoParams, GenericClubInfoListDomain> {
 
     class Base @Inject constructor(private val repository: IClubsRepository) : GetAllClubsUseCase {
-        override fun run(request: NoParams): Flow<Result<GenericClubInfoListDomain>> = repository.clubsFlow
+        override fun invoke(request: NoParams): Flow<Result<GenericClubInfoListDomain>> = repository.clubsFlow
             .mapResult { list -> GenericClubInfoListDomain(list) }
 
         override suspend fun rerun(request: NoParams) = repository.refresh()

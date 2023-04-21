@@ -51,7 +51,7 @@ class TextValue private constructor() {
     }
 
     fun getString(context: Context): String = stringValue
-        ?: stringId?.let { context.getString(it, *stringArgs) }
+        ?: stringId?.let { context.getString(it, *mapArgsWithPossibleTextValues(context, stringArgs)) }
         ?: pluralId?.let { context.resources.getQuantityString(it, quantity, *stringArgs) }
         ?: textValuesAfter?.joinToString("") { it.getString(context) }
         ?: ""
@@ -79,4 +79,7 @@ class TextValue private constructor() {
         result = 31 * result + stringArgs.contentHashCode()
         return result
     }
+
+    private fun mapArgsWithPossibleTextValues(context: Context, array: Array<out Any>): Array<Any> =
+        stringArgs.map { arg -> if (arg is TextValue) arg.getString(context) else arg }.toTypedArray()
 }

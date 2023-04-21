@@ -4,14 +4,13 @@ import android.content.Intent
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import xyz.savvamirzoyan.allaaboutapps.core.Result
 import xyz.savvamirzoyan.allaboutapps.model.TextValue
 
 abstract class BaseViewModel : ViewModel() {
 
-    private val _loadingFlow = MutableStateFlow<Boolean?>(null)
+    private val _loadingFlow = MutableSharedFlow<Boolean>()
     val loadingFlow: Flow<Boolean> = _loadingFlow.filterNotNull()
 
     private val _finishActivityFlow = MutableSharedFlow<Unit>(replay = 0)

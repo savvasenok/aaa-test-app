@@ -8,6 +8,18 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="xyz.savvamirzoyan.allaboutapps.features.clubslist.ClubsListFragment"
-        android:label="Main"
-        tools:layout="@layout/fragment_clubs_list" />
+        tools:layout="@layout/fragment_clubs_list">
+        <action
+            android:id="@+id/to_clubDetailsFragment"
+            app:destination="@id/clubDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clubDetailsFragment"
+        android:name="xyz.savvamirzoyan.allaboutapps.features.clubdetails.ClubDetailsFragment"
+        tools:layout="@layout/fragment_club_details">
+
+        <argument
+            android:name="clubId"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -30,7 +29,7 @@ class ClubsListViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val _clubSortingMethodFlow = MutableStateFlow(ClubSortingMethod.NAME)
-    private val _clubsFlow = getAllClubsUseCase.run(NoParams)
+    private val _clubsFlow = getAllClubsUseCase(NoParams)
 
     @Suppress("UNCHECKED_CAST")
     val clubsFlow = combine(
@@ -38,17 +37,14 @@ class ClubsListViewModel @Inject constructor(
         _clubSortingMethodFlow,
     ) { result, sortingMethod ->
         result.map { wrapper ->
-
             if (result is Result.Success)
-                sortClubsUserCase.run(SortClubsRequestDomain(wrapper.clubs, sortingMethod)).getOrNull()
+                sortClubsUserCase(SortClubsRequestDomain(wrapper.clubs, sortingMethod)).getOrNull()!!.clubs
             else wrapper.clubs
         }
     }
-        .distinctUntilChanged()
         .mapResult { clubs -> clubs.map { genericClubInfoDomainToListUiMapper.map(it) } }
         .fold(
             onException = { throwable ->
-
                 val error =
                     if (throwable is IOException) CommonErrorUi(
                         TextValue(R.string.error_title_no_internet), TextValue(R.string.error_message_no_internet),
@@ -70,9 +66,6 @@ class ClubsListViewModel @Inject constructor(
         }
         .map { it.getOrNull() ?: emptyList() }
         .flowOn(Dispatchers.Default)
-
-    fun onClubClick(clubId: String) {
-    }
 
     fun refresh() {
         viewModelScope.launch {

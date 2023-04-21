@@ -7,15 +7,11 @@ import xyz.savvamirzoyan.allaaboutapps.core.Result
 sealed interface BaseUseCase {
 
     interface Basic<in Request : Model.Domain, Data : Model.Domain> : BaseUseCase {
-        suspend fun run(request: Request): Result<Data>
-    }
-
-    interface Collection<in Request : Model.Domain, Data : Model.Domain> : BaseUseCase {
-        suspend fun run(request: Request): Result<List<Data>>
+        suspend operator fun invoke(request: Request): Result<Data>
     }
 
     interface Flowable<in Request : Model.Domain, Data : Model.Domain> : BaseUseCase {
-        fun run(request: Request): Flow<Result<Data>>
+        operator fun invoke(request: Request): Flow<Result<Data>>
         suspend fun rerun(request: Request) // created only for asking this flow to re-emit, which is single-method in other 2 UseCases
     }
 }

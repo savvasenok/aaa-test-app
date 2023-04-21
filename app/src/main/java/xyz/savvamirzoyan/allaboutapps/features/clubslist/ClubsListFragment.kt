@@ -5,17 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
+import xyz.savvamirzoyan.allaaboutapps.core.PictureURL
 import xyz.savvamirzoyan.allaboutapps.R
 import xyz.savvamirzoyan.allaboutapps.base.BaseFragment
 import xyz.savvamirzoyan.allaboutapps.base.BaseRecyclerViewAdapter
 import xyz.savvamirzoyan.allaboutapps.databinding.FragmentClubsListBinding
-import xyz.savvamirzoyan.allaboutapps.domain.usecase.GetAllClubsUseCase
+import xyz.savvamirzoyan.allaboutapps.databinding.LayoutClubListItemBinding
 import xyz.savvamirzoyan.allaboutapps.features.common.CommonErrorViewHolderFingerprint
-import javax.inject.Inject
 
 class ClubsListFragment : BaseFragment(R.layout.fragment_clubs_list) {
 
@@ -25,12 +28,24 @@ class ClubsListFragment : BaseFragment(R.layout.fragment_clubs_list) {
 
     private val fingerprints by lazy {
         listOf(
-            ClubListItemFingerprint { clubId -> viewModel.onClubClick(clubId) },
+            ClubListItemFingerprint { layout, clubId, imageUrl -> navigateToClubDetails(layout, clubId, imageUrl) },
             CommonErrorViewHolderFingerprint { button ->
                 (button.icon as AnimatedVectorDrawable).start()
                 viewModel.refresh()
             },
         )
+    }
+
+    private fun navigateToClubDetails(layout: LayoutClubListItemBinding, clubId: String, previewImageUrl: PictureURL) {
+
+        val action = ClubsListFragmentDirections.toClubDetailsFragment(clubId)
+        val extras = FragmentNavigatorExtras(
+            layout.root to getString(R.string.transition_name_club_layout),
+            layout.ivClubPicture to getString(R.string.transition_name_club_image),
+            layout.tvCountry to getString(R.string.transition_name_club_country),
+        )
+
+        findNavController().navigate(action, extras)
     }
 
     private val clubsAdapter by lazy {
@@ -39,9 +54,6 @@ class ClubsListFragment : BaseFragment(R.layout.fragment_clubs_list) {
             diffUtilCallback = { old, new -> GenericClubInfoListItemDiffCallback(old, new) },
         )
     }
-
-    @Inject
-    lateinit var useCase: GetAllClubsUseCase
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = activityViewModel()
@@ -84,11 +96,15 @@ class ClubsListFragment : BaseFragment(R.layout.fragment_clubs_list) {
 
         listenToAlerts(viewModel)
 
+        postponeEnterTransition()
+
         collect(viewModel.clubsFlow) {
             binding.swipeRefresh.isRefreshing = false
-            binding.rvClubs.scrollToPosition(0)
-
             clubsAdapter.update(it)
+
+            (view?.parent as? ViewGroup)?.doOnPreDraw {
+                startPostponedEnterTransition()
+            }
         }
     }
 }

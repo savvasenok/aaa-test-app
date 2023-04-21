@@ -3,6 +3,7 @@
   <string name="alert_data_from_cache"></string>
   <string name="app_name"></string>
   <string name="button_try_again"></string>
+  <string name="club_details_description"></string>
   <plurals name="clubs_list_value_label">
       <item quantity="other"></item>
       <item quantity="zero"></item>
@@ -17,5 +18,5 @@
   <string name="error_title_no_internet"></string>
   <string name="error_title_unexpected"></string>
   <string name="hint_sorting_order"></string>
-  <string name="texterify_timestamp">2023-04-15T23:47:06Z</string>
+  <string name="texterify_timestamp">2023-04-17T20:46:53Z</string>
 </resources>
