@@ -30,4 +30,8 @@ internal abstract class TestGenericClubInfoDao : GenericClubInfoDao {
     override suspend fun nukeTable() {
         TODO("Not yet implemented")
     }
+
+    override suspend fun update(item: GenericClubInfoLocal) {
+        TODO("Not yet implemented")
+    }
 }

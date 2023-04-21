@@ -6,7 +6,6 @@ plugins {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
 
     implementation(project(":core"))
     implementation(project(":networking"))
@@ -16,6 +15,7 @@ dependencies {
     implementation(Dependencies.Dagger)
     implementation(Dependencies.Coroutines)
 
+    testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 

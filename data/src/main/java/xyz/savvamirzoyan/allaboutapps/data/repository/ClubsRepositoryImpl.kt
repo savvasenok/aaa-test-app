@@ -1,6 +1,5 @@
 package xyz.savvamirzoyan.allaboutapps.data.repository
 
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.combine
@@ -18,7 +17,6 @@ import xyz.savvamirzoyan.allaboutapps.networking.services.ApiService
 import xyz.savvamirzoyan.allaboutapps.storage.dao.GenericClubInfoDao
 import javax.inject.Inject
 
-@OptIn(FlowPreview::class)
 class ClubsRepositoryImpl @Inject constructor(
     private val cloudSource: ApiService,
     private val localSource: GenericClubInfoDao,

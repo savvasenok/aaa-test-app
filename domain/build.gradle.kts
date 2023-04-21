@@ -9,4 +9,11 @@ dependencies {
 
     implementation(Dependencies.Dagger)
     implementation(Dependencies.Coroutines)
+
+    testImplementation(kotlin("test"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }

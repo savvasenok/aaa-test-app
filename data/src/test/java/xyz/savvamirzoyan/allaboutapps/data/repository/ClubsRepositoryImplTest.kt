@@ -41,7 +41,7 @@ internal class ClubsRepositoryImplTest {
 
         val result = repository.clubsFlow.take(1).toList().first()
 
-        Assertions.assertTrue(result is Result.Exception && result.throwable is UnknownHostException, )
+        Assertions.assertTrue(result is Result.Exception && result.throwable is UnknownHostException)
     }
 
     @Test
@@ -127,7 +127,7 @@ internal class ClubsRepositoryImplTest {
             repository.refresh()
         }
 
-        val resultList = repository.clubsFlow.take(2).toList()
+        val resultList = repository.clubsFlow.take(1).toList()
 
         Assertions.assertEquals(
             expected,

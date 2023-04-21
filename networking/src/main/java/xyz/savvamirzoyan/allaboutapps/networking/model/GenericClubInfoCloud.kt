@@ -6,7 +6,7 @@ import xyz.savvamirzoyan.allaaboutapps.core.Model
 import xyz.savvamirzoyan.allaaboutapps.core.PictureURL
 
 // 1. Its said, that app would be reused for different markets, I suppose it still meant football
-// 2. Its not shown in the project file, but API endpoint actually provides IDs for clubs, what you probably already know
+// 2. Its not shown in the project file, but API endpoint actually provides IDs for clubs, what you probably already knew
 @JsonClass(generateAdapter = true)
 data class GenericClubInfoCloud(
     val id: String,
