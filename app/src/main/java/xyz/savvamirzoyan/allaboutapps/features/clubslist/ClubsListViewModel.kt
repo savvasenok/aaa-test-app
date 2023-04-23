@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import xyz.savvamirzoyan.allaaboutapps.core.Result
 import xyz.savvamirzoyan.allaaboutapps.core.fold
@@ -66,9 +67,15 @@ class ClubsListViewModel @Inject constructor(
         }
         .map { it.getOrNull() ?: emptyList() }
         .flowOn(Dispatchers.Default)
+        .onEach { stopLoading() }
+
+    init {
+        refresh()
+    }
 
     fun refresh() {
         viewModelScope.launch {
+            startLoading()
             getAllClubsUseCase.rerun(NoParams)
         }
     }

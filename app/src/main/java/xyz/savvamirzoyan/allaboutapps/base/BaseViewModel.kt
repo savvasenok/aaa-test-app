@@ -1,17 +1,21 @@
 package xyz.savvamirzoyan.allaboutapps.base
 
 import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.onEach
 import xyz.savvamirzoyan.allaaboutapps.core.Result
+import xyz.savvamirzoyan.allaaboutapps.core.emit
 import xyz.savvamirzoyan.allaboutapps.model.TextValue
 
 abstract class BaseViewModel : ViewModel() {
 
-    private val _loadingFlow = MutableSharedFlow<Boolean>()
-    val loadingFlow: Flow<Boolean> = _loadingFlow.filterNotNull()
+    private val _loadingFlow = MutableStateFlow(false)
+    val loadingFlow: Flow<Boolean> = _loadingFlow
 
     private val _finishActivityFlow = MutableSharedFlow<Unit>(replay = 0)
     val finishActivityFlow: Flow<Unit> = _finishActivityFlow
@@ -25,7 +29,7 @@ abstract class BaseViewModel : ViewModel() {
     private val _alertFlow = MutableSharedFlow<TextValue>(replay = 0)
     val alertFlow: Flow<TextValue> = _alertFlow
 
-    suspend fun <T> whileLoading(function: suspend () -> T): T {
+    protected suspend fun <T> whileLoading(function: suspend () -> T): T {
         _loadingFlow.emit(true)
         val result: T = function()
         _loadingFlow.emit(false)
@@ -33,16 +37,12 @@ abstract class BaseViewModel : ViewModel() {
         return result
     }
 
-    protected suspend fun finishActivity() {
-        _finishActivityFlow.emit(Unit)
-    }
+    protected suspend fun startLoading() = _loadingFlow.emit(true)
+    protected suspend fun stopLoading() = _loadingFlow.emit(false)
 
-    protected suspend fun closeFragment() {
-        _closeFragmentFlow.emit(Unit)
-    }
-
+    protected suspend fun finishActivity() = _finishActivityFlow.emit()
+    protected suspend fun closeFragment() = _closeFragmentFlow.emit()
     protected suspend fun showAlert(text: TextValue) = _alertFlow.emit(text)
-
     protected suspend fun navigateTo(intent: Intent) = _navigationIntentFlow.emit(intent)
 
     protected suspend fun <T : Any> Result<T>.handle(

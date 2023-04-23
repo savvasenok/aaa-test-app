@@ -20,14 +20,12 @@ class ClubDetailsViewModel @AssistedInject constructor(
 
     val clubDetailsFlow: Flow<ClubDetailsUi> = flow {
 
-        // TODO: Fragment not opend when no data provided
-
         getClubUseCase(GetClubUseCaseRequest(clubId)).handle(
-            onError = { a, b ->
+            onError = { _, _ ->
                 ClubDetailsUi.Failure(R.drawable.ic_error, TextValue(R.string.error_message_no_data))
                     .also { emit(it) }
             },
-            onException = { t ->
+            onException = { _ ->
                 ClubDetailsUi.Failure(R.drawable.ic_error, TextValue(R.string.error_message_no_data))
                     .also { emit(it) }
             },

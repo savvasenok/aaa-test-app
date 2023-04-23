@@ -16,7 +16,7 @@ dependencies {
     implementation(Dependencies.Coroutines)
 
     testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation(Dependencies.JUnitJupiter)
 }
 
 tasks.withType<Test> {

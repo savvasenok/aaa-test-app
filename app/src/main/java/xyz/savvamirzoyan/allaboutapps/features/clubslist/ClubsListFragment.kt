@@ -2,6 +2,7 @@ package xyz.savvamirzoyan.allaboutapps.features.clubslist
 
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.zhuinden.fragmentviewbindingdelegatekt.viewBinding
-import xyz.savvamirzoyan.allaaboutapps.core.PictureURL
 import xyz.savvamirzoyan.allaboutapps.R
 import xyz.savvamirzoyan.allaboutapps.base.BaseFragment
 import xyz.savvamirzoyan.allaboutapps.base.BaseRecyclerViewAdapter
@@ -28,7 +28,7 @@ class ClubsListFragment : BaseFragment(R.layout.fragment_clubs_list) {
 
     private val fingerprints by lazy {
         listOf(
-            ClubListItemFingerprint { layout, clubId, imageUrl -> navigateToClubDetails(layout, clubId, imageUrl) },
+            ClubListItemFingerprint { layout, clubId -> navigateToClubDetails(layout, clubId) },
             CommonErrorViewHolderFingerprint { button ->
                 (button.icon as AnimatedVectorDrawable).start()
                 viewModel.refresh()
@@ -36,7 +36,7 @@ class ClubsListFragment : BaseFragment(R.layout.fragment_clubs_list) {
         )
     }
 
-    private fun navigateToClubDetails(layout: LayoutClubListItemBinding, clubId: String, previewImageUrl: PictureURL) {
+    private fun navigateToClubDetails(layout: LayoutClubListItemBinding, clubId: String) {
 
         val action = ClubsListFragmentDirections.toClubDetailsFragment(clubId)
         val extras = FragmentNavigatorExtras(
@@ -70,18 +70,13 @@ class ClubsListFragment : BaseFragment(R.layout.fragment_clubs_list) {
 
     private fun setupClickListeners() {
         binding.toolbar.setOnMenuItemClickListener {
-
-            if (it.itemId == R.id.menu_item_sorting_clubs) {
-                viewModel.onClubSortingMethodChange()
-            }
+            if (it.itemId == R.id.menu_item_sorting_clubs) viewModel.onClubSortingMethodChange()
 
             true
         }
     }
 
     private fun setupViews() {
-        binding.swipeRefresh.isRefreshing = true
-
         binding.rvClubs.adapter = clubsAdapter
         binding.rvClubs.layoutManager = LinearLayoutManager(requireContext())
         binding.rvClubs.addItemDecoration(
@@ -90,6 +85,10 @@ class ClubsListFragment : BaseFragment(R.layout.fragment_clubs_list) {
         )
 
         binding.swipeRefresh.setOnRefreshListener { viewModel.refresh() }
+
+        (view?.parent as? ViewGroup)?.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
     }
 
     private fun setupFlowListeners() {
@@ -101,10 +100,11 @@ class ClubsListFragment : BaseFragment(R.layout.fragment_clubs_list) {
         collect(viewModel.clubsFlow) {
             binding.swipeRefresh.isRefreshing = false
             clubsAdapter.update(it)
+        }
 
-            (view?.parent as? ViewGroup)?.doOnPreDraw {
-                startPostponedEnterTransition()
-            }
+        // custom implementation of loading
+        collect(viewModel.loadingFlow) {
+            binding.swipeRefresh.isRefreshing = it
         }
     }
 }

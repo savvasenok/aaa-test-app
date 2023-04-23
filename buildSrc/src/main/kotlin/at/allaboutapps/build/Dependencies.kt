@@ -11,10 +11,9 @@ object Versions {
     const val Retrofit = "2.9.0"
     const val Room = "2.4.3"
     const val Coroutines = "1.6.3"
-    const val JUnit = "4.13.2"
-    const val JunitExt = "1.1.4"
+    const val JUnit = "5.8.1"
+    const val JunitExt = "5.8.1"
 
-    // const val RxJava3 = "3.1.5"
     const val LifecycleVersion = "2.6.0-alpha01"
     const val NavVersion = "2.5.1"
     const val Epoxy = "4.6.3"
@@ -44,6 +43,7 @@ object Dependencies {
     const val AndroidXRecyclerView = "androidx.recyclerview:recyclerview:1.3.0-beta01"
     const val AndroidXCardView = "androidx.cardview:cardview:1.0.0"
     const val AndroidXConstraintLayout = "androidx.constraintlayout:constraintlayout:2.2.0-alpha01"
+    const val AndroidxSwipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     const val AndroidXPreferenceManager = "androidx.preference:preference-ktx:1.2.0"
     const val AndroidXSplashScreen = "androidx.core:core-splashscreen:1.0.0-beta02"
 
@@ -105,22 +105,12 @@ object Dependencies {
     // Retrofit
     const val Retrofit = "com.squareup.retrofit2:retrofit:${Versions.Retrofit}"
     const val RetrofitConverterMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.Retrofit}"
-
-    // const val RetrofitAdapterRxJava3 = "com.squareup.retrofit2:adapter-rxjava3:${Versions.Retrofit}"
     const val RetrofitMock = "com.squareup.retrofit2:retrofit-mock:${Versions.Retrofit}"
 
     // Room
     const val RoomRuntime = "androidx.room:room-runtime:${Versions.Room}"
     const val RoomKotlin = "androidx.room:room-ktx:${Versions.Room}"
     const val RoomAndroid = "androidx.room:room-common:${Versions.Room}"
-    // const val RoomRxJava3 = "androidx.room:room-rxjava3:${Versions.Room}"
-
-    // // Reactive
-    // const val RxJava3 = "io.reactivex.rxjava3:rxjava:${Versions.RxJava3}"
-    // const val RxJavaAndroid3 = "io.reactivex.rxjava3:rxandroid:3.0.0"
-    // const val RxKotlin3 = "io.reactivex.rxjava3:rxkotlin:3.0.1"
-    // const val RxBinding = "com.jakewharton.rxbinding4:rxbinding:4.0.0"
-    // const val RxRelay = "com.jakewharton.rxrelay3:rxrelay:3.0.1"
 
     // Coroutines
     const val Coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.Coroutines}"
@@ -132,5 +122,5 @@ object Dependencies {
     // Testing
     const val JUnit = "junit:junit:${Versions.JUnit}"
     const val TestExtJunit = "androidx.test.ext:junit:${Versions.JunitExt}"
-    // const val  = "androidx.test.espresso:espresso-core:$espressoVersion"
+    const val JUnitJupiter = "org.junit.jupiter:junit-jupiter"
 }

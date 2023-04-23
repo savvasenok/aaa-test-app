@@ -21,7 +21,7 @@ android {
 
         addManifestPlaceholders(mapOf("apiKey" to "secret")) // use with ${apiKey} in manifest
 
-        resConfigs("de") // todo specify default locale(s)
+        resConfigs("de")
     }
 
 
@@ -83,7 +83,6 @@ android {
 }
 
 dependencies {
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
     implementation(project(":core"))
@@ -96,6 +95,7 @@ dependencies {
 
     implementation(Dependencies.KotlinStdLib)
     implementation(Dependencies.MaterialComponents)
+    implementation(Dependencies.AndroidxSwipeRefreshLayout)
 
     implementation(platform(Dependencies.FirebaseBom))
     // Firebase Libs
@@ -133,11 +133,7 @@ dependencies {
     // logging
     implementation(Dependencies.Timber)
 
-    // implementation(Dependencies.RxJava3)
-    // implementation(Dependencies.RxKotlin3)
-
     // networking
-    // implementation(Dependencies.RetrofitAdapterRxJava3)
     implementation(Dependencies.RetrofitConverterMoshi)
 
     implementation(Dependencies.OkHttpLoggingInterceptor)

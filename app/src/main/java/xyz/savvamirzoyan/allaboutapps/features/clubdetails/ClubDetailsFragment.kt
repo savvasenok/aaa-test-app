@@ -19,6 +19,7 @@ import xyz.savvamirzoyan.allaboutapps.databinding.FragmentClubDetailsBinding
 import xyz.savvamirzoyan.allaboutapps.utils.ext.load
 import xyz.savvamirzoyan.allaboutapps.utils.ext.setText
 import xyz.savvamirzoyan.allaboutapps.utils.ext.setTitle
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class ClubDetailsFragment : BaseFragment(R.layout.fragment_club_details) {
@@ -53,7 +54,7 @@ class ClubDetailsFragment : BaseFragment(R.layout.fragment_club_details) {
 
     private fun setupFlowListeners() {
 
-        postponeEnterTransition()
+        postponeEnterTransition(1, TimeUnit.SECONDS)
 
         collect(viewModel.clubDetailsFlow) {
             when (it) {

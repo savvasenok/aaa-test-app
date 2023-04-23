@@ -11,7 +11,7 @@ import xyz.savvamirzoyan.allaboutapps.base.BaseViewHolderFingerprint
 import xyz.savvamirzoyan.allaboutapps.databinding.LayoutClubListItemBinding
 
 class ClubListItemFingerprint(
-    private val onClick: (layout: LayoutClubListItemBinding, clubId: String, imageUrl: PictureURL) -> Unit,
+    private val onClick: (layout: LayoutClubListItemBinding, clubId: String) -> Unit,
 ) : BaseViewHolderFingerprint<LayoutClubListItemBinding, GenericClubInfoListItemUi> {
 
     override fun isRelativeItem(item: Model.UI) = item is GenericClubInfoListItemUi

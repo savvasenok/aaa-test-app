@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -85,16 +86,29 @@ abstract class BaseFragment(@LayoutRes contentLayoutId: Int = 0) :
         }
     }
 
-    // fun setupDefaultFlows(viewModel: CoreViewModel) {
-    //     collect(viewModel.loadingFlow) { isLoading ->
-    //         when (isLoading) {
-    //             true -> coreActivity.startLoading()
-    //             false -> coreActivity.stopLoading()
-    //         }
-    //     }
-    //
-    //     collect(viewModel.navigationDeeplinkFlow) { data ->
-    //         findNavController().navigate(request = data.request, navOptions = data.navigationOptions)
-    //     }
-    // }
+    protected fun listenToIntent(viewModel: BaseViewModel) {
+        collect(viewModel.navigationIntentFlow) {
+            requireContext().startActivity(it)
+        }
+    }
+
+    protected fun listenToCloseFragment(viewModel: BaseViewModel) {
+        collect(viewModel.closeFragmentFlow) {
+            findNavController().navigateUp()
+        }
+    }
+
+    protected fun listenToCloseActivity(viewModel: BaseViewModel) {
+        collect(viewModel.finishActivityFlow) {
+            baseActivity.finish()
+        }
+    }
+
+    /**
+     * Usually tells [BaseActivity] to show global (activity-wide) progress bar, e.g. at the top of the screen.
+     * No use in current app
+     * */
+    protected fun listenToLoading(viewModel: BaseViewModel) {
+        collect(viewModel.loadingFlow) {}
+    }
 }

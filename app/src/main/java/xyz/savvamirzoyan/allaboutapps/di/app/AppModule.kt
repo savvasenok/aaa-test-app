@@ -82,7 +82,6 @@ class AppModule {
             .addConverterFactory(UnwrapConverterFactory())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addCallAdapterFactory(ResultCallAdapterFactory.create())
-            // .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build()
             .create(ApiService::class.java)
     }

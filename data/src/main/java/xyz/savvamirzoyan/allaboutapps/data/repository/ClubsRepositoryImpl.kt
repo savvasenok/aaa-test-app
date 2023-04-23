@@ -5,7 +5,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
 import xyz.savvamirzoyan.allaaboutapps.core.Result
 import xyz.savvamirzoyan.allaaboutapps.core.emit
 import xyz.savvamirzoyan.allaaboutapps.core.mapResult
@@ -38,7 +37,7 @@ class ClubsRepositoryImpl @Inject constructor(
             if (cloud.isSuccess) cloud
             else if (local.data.isNotEmpty()) local
             else cloud
-        }.onStart { refresh() }
+        }
 
     override suspend fun refresh() {
         _fetchFromCloudActionFlow.emit()
