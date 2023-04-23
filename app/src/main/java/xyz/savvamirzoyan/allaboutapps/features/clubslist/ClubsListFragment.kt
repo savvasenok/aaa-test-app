@@ -31,7 +31,7 @@ class ClubsListFragment : BaseFragment(R.layout.fragment_clubs_list) {
             ClubListItemFingerprint { layout, clubId -> navigateToClubDetails(layout, clubId) },
             CommonErrorViewHolderFingerprint { button ->
                 (button.icon as AnimatedVectorDrawable).start()
-                viewModel.refresh()
+                viewModel.refresh(false)
             },
         )
     }
@@ -84,7 +84,7 @@ class ClubsListFragment : BaseFragment(R.layout.fragment_clubs_list) {
                 .apply { isLastItemDecorated = false },
         )
 
-        binding.swipeRefresh.setOnRefreshListener { viewModel.refresh() }
+        binding.swipeRefresh.setOnRefreshListener { viewModel.refresh(false) }
 
         (view?.parent as? ViewGroup)?.doOnPreDraw {
             startPostponedEnterTransition()
