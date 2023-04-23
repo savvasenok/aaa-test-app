@@ -43,6 +43,7 @@ class ClubsListViewModel @Inject constructor(
             else wrapper.clubs
         }
     }
+        .onEach { if (it.isSuccess) startLoading() }
         .mapResult { clubs -> clubs.map { genericClubInfoDomainToListUiMapper.map(it) } }
         .fold(
             onException = { throwable ->
@@ -75,7 +76,6 @@ class ClubsListViewModel @Inject constructor(
 
     fun refresh() {
         viewModelScope.launch {
-            startLoading()
             getAllClubsUseCase.rerun(NoParams)
         }
     }
